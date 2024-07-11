@@ -4,10 +4,12 @@ const {ApolloServer,gql } = require('apollo-server-express');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 const cors = require('cors')//import cors
-const userApiFromRouter = require('./routes/userRoutes') //import
+const userApiFromRouter = require('./routes/userRouter')
+const userApiFromRouter = 
+require('./routes/userRoutes') //import
 const app = express() 
 const port = 3001;
-const url= 'mongodb+srv://nikhilvijj:manager@cluster0.btrxovb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const url ='mongodb+srv://nikhilvijj:manager@cluster0.btrxovb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 app.use(express.json())
 app.use(cors()) //using cors
@@ -24,10 +26,32 @@ async function StartServer(){
     console.log('Server Live 3001');
    })
 }
-function TESTING(){
-    return 1;
+
+beforeAll(async ()=>{
+   await StartServer();
+})
+
+//test my graphql server
+//well run our test cases befor server starts
+
+test('GraphQL server started and running',async ()=>{
+   const res = await request(app)
+   .post('/graphql').send({
+      query:`
+      query{
+         _schema{
+            queryType{
+               name
+            }
+         }   
+      }
+      `
+   })
+   expect(res.statusCode).toBe(200)
+   expect(res.body.data._schema.queryType.name).toBe('Query')
+})
+function add(a,b){
+    return a+b;
 }
-function Test2(){return false;}
-TESTING();
-Test2();
-StartServer();
+module.exports =add;
+//StartServer();
