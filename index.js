@@ -14,7 +14,7 @@ app.use(cors()) //using corscd
 mongoose.connect(url,{useNewUrlParser:true,
 useUnifiedTopology:true})
 .then(()=>{console.log('DB connected')})
-.catch((err)=>{console.log(err)})
+
 const server = new ApolloServer({typeDefs,resolvers});
 app.use('/users',userApiFromRouter);//add router
 async function StartServer(){
