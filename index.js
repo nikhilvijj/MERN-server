@@ -25,31 +25,13 @@ async function StartServer(){
    })
 }
 
-beforeAll(async ()=>{
-   await StartServer();
-})
+
 
 //test my graphql server
 //well run our test cases befor server starts
 
-test('GraphQL server started and running',async ()=>{
-   const res = await request(app)
-   .post('/graphql').send({
-      query:`
-      query{
-         _schema{
-            queryType{
-               name
-            }
-         }   
-      }
-      `
-   })
-   expect(res.statusCode).toBe(200)
-   expect(res.body.data._schema.queryType.name).toBe('Query')
-})
-function add(a,b){
-    return a+b;
-}
-module.exports =add;
-//StartServer();
+
+
+
+
+StartServer();
