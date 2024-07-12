@@ -4,15 +4,13 @@ const {ApolloServer,gql } = require('apollo-server-express');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 const cors = require('cors')//import cors
-const userApiFromRouter = require('./routes/userRouter')
-const userApiFromRouter = 
-require('./routes/userRoutes') //import
+const userApiFromRouter = require('./routes/userRoutes')
 const app = express() 
 const port = 3001;
 const url ='mongodb+srv://nikhilvijj:manager@cluster0.btrxovb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 app.use(express.json())
-app.use(cors()) //using cors
+app.use(cors()) //using corscd 
 mongoose.connect(url,{useNewUrlParser:true,
 useUnifiedTopology:true})
 .then(()=>{console.log('DB connected')})
